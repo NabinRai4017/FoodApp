@@ -8,12 +8,9 @@ class AppState{
         return AppState();
     }
 
-    @override
-    String toString() {
-        return 'AppState{
-
-
-        }';
-    }
+    // @override
+    // String toString() {
+    //     return '';
+    // }
 
 }

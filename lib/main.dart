@@ -9,7 +9,6 @@ import 'package:redux/redux.dart';
 void main() => runApp(const FoodApp());
 
 class FoodApp extends StatelessWidget {
-  
   const FoodApp({Key? key}) : super(key: key);
 
   @override
@@ -33,6 +32,6 @@ class FoodApp extends StatelessWidget {
               // AppRoutes.register: (context) => RegisterScreen(),
               // AppRoutes.login: (context) => LoginScreen(),
             },
-            home: const Splash()));
+            home: Splash()));
   }
 }
