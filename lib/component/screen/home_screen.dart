@@ -1,4 +1,6 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/component/widget/bottom_nav_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -13,6 +15,9 @@ class _HomeScreenState extends State<HomeScreen> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      if (kDebugMode) {
+        print(_selectedIndex);
+      }
     });
   }
 
@@ -28,35 +33,8 @@ class _HomeScreenState extends State<HomeScreen> {
         tooltip: 'Help?',
         child: const Icon(Icons.chat),
       ),
-      bottomNavigationBar: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Container(
-          decoration: const BoxDecoration(
-            borderRadius: BorderRadius.all(Radius.circular(20)),
-            boxShadow: <BoxShadow>[
-              BoxShadow(color: Colors.black38, spreadRadius: 0, blurRadius: 10),
-            ],
-          ),
-          child: ClipRRect(
-            borderRadius: const BorderRadius.all(Radius.circular(20)),
-            child: BottomNavigationBar(
-              items: const <BottomNavigationBarItem>[
-                BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.search), label: "Search"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.favorite), label: "Favorite"),
-                BottomNavigationBarItem(
-                    icon: Icon(Icons.person), label: "Profile")
-              ],
-              currentIndex: _selectedIndex,
-              selectedItemColor: Colors.amber[800],
-              unselectedItemColor: Colors.grey[800],
-              onTap: _onItemTapped,
-            ),
-          ),
-        ),
-      ),
+      bottomNavigationBar:
+          BottomNavBar(onTapped: _onItemTapped, selectedIndex: _selectedIndex),
     );
   }
 }
