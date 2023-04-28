@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:food_app/component/screen/splash.dart';
+import 'package:food_app/component/app_life_cycle.dart';
+import 'package:food_app/component/screen/home_screen.dart';
 import 'package:food_app/reducer/app_reducer.dart';
 import 'model/state/app_state.dart';
 import 'package:redux_logging/redux_logging.dart';
@@ -25,13 +26,14 @@ class FoodApp extends StatelessWidget {
 
     return StoreProvider(
         store: store,
-        child: const MaterialApp(
-            debugShowCheckedModeBanner: false,
-            routes: {
-              // AppRoutes.home: (context) => HomeScreen(),
-              // AppRoutes.register: (context) => RegisterScreen(),
-              // AppRoutes.login: (context) => LoginScreen(),
-            },
-            home: Splash()));
+        child: const AppLifeCycle(
+            child: MaterialApp(
+                debugShowCheckedModeBanner: false,
+                routes: {
+                  // AppRoutes.home: (context) => HomeScreen(),
+                  // AppRoutes.register: (context) => RegisterScreen(),
+                  // AppRoutes.login: (context) => LoginScreen(),
+                },
+                home: HomeScreen())));
   }
 }
