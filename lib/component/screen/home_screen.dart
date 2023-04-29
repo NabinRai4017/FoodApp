@@ -1,6 +1,8 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/component/screen/popular_screen.dart';
 import 'package:food_app/component/widget/bottom_nav_bar.dart';
+import 'package:food_app/component/widget/main_app_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -24,12 +26,10 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Food App'),
-      ),
-      body: const Center(child: Text('Home')),
+      appBar: const MainAppBar(title: "Food App"),
+      body: const PopularScreen(),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {},
+        onPressed: () {},
         tooltip: 'Help?',
         child: const Icon(Icons.chat),
       ),

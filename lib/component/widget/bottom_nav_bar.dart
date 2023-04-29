@@ -35,9 +35,9 @@ class BottomNavBar extends StatelessWidget {
                   icon: SizedBox(
                     height: 38,
                     width: 38,
-                    child: Icon(Icons.search),
+                    child: Icon(Icons.local_offer),
                   ),
-                  label: "Search"),
+                  label: "Offer"),
               BottomNavigationBarItem(
                   icon: SizedBox(
                     height: 38,
@@ -54,8 +54,8 @@ class BottomNavBar extends StatelessWidget {
                   label: "Profile")
             ],
             currentIndex: selectedIndex,
-            selectedItemColor: Colors.amber[800],
-            unselectedItemColor: Colors.grey[800],
+            selectedItemColor: Colors.grey[800],
+            unselectedItemColor: Colors.grey,
             selectedFontSize: 12,
             onTap: onTapped,
           ),
