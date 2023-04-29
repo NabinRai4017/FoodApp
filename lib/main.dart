@@ -1,3 +1,5 @@
+// ignore_for_file: depend_on_referenced_packages
+
 import 'package:flutter/material.dart';
 import 'package:food_app/component/app_life_cycle.dart';
 import 'package:food_app/component/screen/home_screen.dart';
