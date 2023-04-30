@@ -1,16 +1,23 @@
-class AppState{
+import 'package:food_app/model/error.dart';
+import 'package:food_app/model/state/user_state.dart';
 
-    AppState();
+class AppState {
+  final bool isLoading;
+  final UserState? userState;
+  final ErrorState? errorState;
 
-    factory AppState.initial() => AppState();
+  AppState({required this.isLoading, required this.userState, this.errorState});
 
-    AppState copyWith() {
-        return AppState();
-    }
+  factory AppState.initial() =>
+      AppState(isLoading: false, userState: null, errorState: null);
 
-    // @override
-    // String toString() {
-    //     return '';
-    // }
+  AppState copyWith() {
+    return AppState(
+        isLoading: isLoading, userState: userState, errorState: errorState);
+  }
 
+  @override
+  String toString() {
+    return 'AppState{isLoading: $isLoading, userState: $userState,errorState: $errorState}';
+  }
 }

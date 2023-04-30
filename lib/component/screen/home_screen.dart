@@ -1,6 +1,9 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:food_app/component/screen/favourite_screen.dart';
+import 'package:food_app/component/screen/offer_screen.dart';
 import 'package:food_app/component/screen/popular_screen.dart';
+import 'package:food_app/component/screen/profile_screen.dart';
 import 'package:food_app/component/widget/bottom_nav_bar.dart';
 import 'package:food_app/component/widget/main_app_bar.dart';
 
@@ -27,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const MainAppBar(title: "Food App"),
-      body: const PopularScreen(),
+      body: const ProfileScreen(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         tooltip: 'Help?',
@@ -36,5 +39,18 @@ class _HomeScreenState extends State<HomeScreen> {
       bottomNavigationBar:
           BottomNavBar(onTapped: _onItemTapped, selectedIndex: _selectedIndex),
     );
+  }
+
+  Widget buildScreen(int index) {
+    switch (index) {
+      case 1:
+        return const OfferScreen();
+      case 2:
+        return const FavouriteScreen();
+      case 3:
+        return const ProfileScreen();
+      default:
+        return const PopularScreen();
+    }
   }
 }

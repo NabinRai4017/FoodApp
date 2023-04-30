@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/component/app_life_cycle.dart';
 import 'package:food_app/component/screen/home_screen.dart';
+import 'package:food_app/middleware/user_middleware.dart';
 import 'package:food_app/reducer/app_reducer.dart';
 import 'model/state/app_state.dart';
 import 'package:redux_logging/redux_logging.dart';
@@ -20,8 +21,8 @@ class FoodApp extends StatelessWidget {
       appReducer,
       initialState: AppState.initial(),
       middleware: [
-        // ...createAuthMiddleware(context),
-        // ...createErrorMiddleware(),
+        ...createUserMiddleware(context),
+        //  ...createErrorMiddleware(),
         LoggingMiddleware.printer()
       ],
     );
