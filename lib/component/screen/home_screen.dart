@@ -16,6 +16,12 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _selectedIndex = 0;
+  final List<Widget> _pages = [
+    const PopularScreen(),
+    const OfferScreen(),
+    const FavouriteScreen(),
+    const ProfileScreen()
+  ];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -30,27 +36,12 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const MainAppBar(title: "Food App"),
-      body: const ProfileScreen(),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {},
-        tooltip: 'Help?',
-        child: const Icon(Icons.chat),
+      body: IndexedStack(
+        index: _selectedIndex,
+        children: _pages,
       ),
       bottomNavigationBar:
           BottomNavBar(onTapped: _onItemTapped, selectedIndex: _selectedIndex),
     );
-  }
-
-  Widget buildScreen(int index) {
-    switch (index) {
-      case 1:
-        return const OfferScreen();
-      case 2:
-        return const FavouriteScreen();
-      case 3:
-        return const ProfileScreen();
-      default:
-        return const PopularScreen();
-    }
   }
 }

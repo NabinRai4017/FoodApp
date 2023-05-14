@@ -18,12 +18,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return StoreConnector<AppState, _ViewModel>(
         converter: _ViewModel.fromStore,
         builder: (BuildContext context, _ViewModel vm) {
-          return Center(
-            child: TextButton(
-              onPressed: () {
-                vm.onPressedCallback();
-              },
-              child: const Text("Login"),
+          return Scaffold(
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {},
+              tooltip: 'Help?',
+              child: const Icon(Icons.chat),
+            ),
+            body: const Center(
+              child: Text('Profile'),
             ),
           );
         });
