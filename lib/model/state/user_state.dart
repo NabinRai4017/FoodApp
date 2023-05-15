@@ -1,4 +1,5 @@
 import 'package:food_app/model/user.dart';
+import 'package:food_app/service/user_pref.dart';
 
 class UserState {
   User? user;

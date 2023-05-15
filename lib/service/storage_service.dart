@@ -13,8 +13,8 @@ class StorageService {
     // initialization logic
   }
 
-  Future<String?> read(String key) async {
-    String? value = await _storage.read(key: key);
+  Future<String> read(String key) async {
+    String value = await _storage.read(key: key) ?? "";
     return value;
   }
 
@@ -23,15 +23,15 @@ class StorageService {
     return allValues;
   }
 
-  void delete(String key) async {
+  Future delete(String key) async {
     await _storage.delete(key: key);
   }
 
-  void deleteAll() async {
+  Future deleteAll() async {
     await _storage.deleteAll();
   }
 
-  void write(String key, value) async {
+  Future write(String key, value) async {
     await _storage.write(key: key, value: value);
   }
 }
