@@ -24,17 +24,20 @@ Middleware<AppState> _createLogInMiddleware(context) {
         store.dispatch(LoadingStart());
         var response = await loginUser(action.data);
         if (kDebugMode) {
-          print("-----$response");
+          print("-----${response.toString()}");
         }
         if (response.statusCode == 200) {
           Map<String, dynamic> jsonData = jsonDecode(response.body.toString());
           if (kDebugMode) {
-            print(jsonData);
+            print("json data: ${jsonData.toString()}");
           }
           UserState userState = UserState.fromJson(jsonData);
           store.dispatch(LoadingEnd());
           store.dispatch(LoginSuccessful(userState: userState));
         } else {
+          if (kDebugMode) {
+            print("====${response.body}====");
+          }
           store.dispatch(LoadingEnd());
           // ErrorState eState = ErrorState(
           //   title: 'Error',
@@ -44,10 +47,11 @@ Middleware<AppState> _createLogInMiddleware(context) {
         }
       } catch (error) {
         store.dispatch(LoadingEnd());
-        Map<String, dynamic> errorJson = jsonDecode(error.toString());
+
         if (kDebugMode) {
-          print(errorJson);
+          print(error);
         }
+
         // ErrorState eState = ErrorState(
         //   title: 'Error',
         //   message: errorJson.toString(),

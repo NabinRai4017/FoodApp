@@ -1,5 +1,7 @@
-const String baseUrl = "https://nabinrai.pythonanywhere.com/";
+import 'dart:io';
+
+const String baseUrl = "https://nabinrai.pythonanywhere.com";
 const baseHeader = {
-  'Accept': 'application/json',
-  'Content-Type': 'application/json',
+  HttpHeaders.acceptHeader: 'application/json',
+  HttpHeaders.contentTypeHeader: 'application/json',
 };

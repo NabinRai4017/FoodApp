@@ -1,7 +1,7 @@
 import 'package:food_app/model/state/user_state.dart';
 
 class LogIn {
-  final Map<String, dynamic> data;
+  final Map<String, String> data;
   LogIn({required this.data});
 }
 

@@ -86,7 +86,7 @@ class _ViewModel {
 
   static _ViewModel fromStore(Store<AppState> store) {
     return _ViewModel(onPressedCallback: (email, password) {
-      Map<String, dynamic> data = {
+      Map<String, String> data = {
         "email": email,
         "password": password,
       };
