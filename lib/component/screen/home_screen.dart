@@ -6,6 +6,7 @@ import 'package:food_app/component/screen/popular_screen.dart';
 import 'package:food_app/component/screen/profile_screen.dart';
 import 'package:food_app/component/widget/bottom_nav_bar.dart';
 import 'package:food_app/component/widget/main_app_bar.dart';
+import 'package:food_app/component/widget/side_menu_drawer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -36,6 +37,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const MainAppBar(title: "Food App"),
+      drawer: const SideMenuDrawer(),
       body: IndexedStack(
         index: _selectedIndex,
         children: _pages,

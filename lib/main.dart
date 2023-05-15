@@ -21,7 +21,7 @@ class FoodApp extends StatelessWidget {
       appReducer,
       initialState: AppState.initial(),
       middleware: [
-        ...createUserMiddleware(context),
+        // ...createUserMiddleware(context),
         //  ...createErrorMiddleware(),
         LoggingMiddleware.printer()
       ],

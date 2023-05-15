@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:food_app/action/user_action.dart';
 import 'package:food_app/model/state/app_state.dart';
+import 'package:food_app/validation/email_validation.dart';
+import 'package:food_app/validation/password_validation.dart';
 // ignore: depend_on_referenced_packages
 import 'package:redux/redux.dart';
 
@@ -12,7 +14,8 @@ class ProfileScreen extends StatefulWidget {
   State<ProfileScreen> createState() => _ProfileScreenState();
 }
 
-class _ProfileScreenState extends State<ProfileScreen> {
+class _ProfileScreenState extends State<ProfileScreen>
+    with EmailValidation, PasswordValidation {
   String? _email, _password;
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -36,25 +39,27 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     TextFormField(
                       keyboardType: TextInputType.emailAddress,
                       validator: (input) {
-                        if (input == null || input.isEmpty) {
-                          return 'Please a valid email';
-                        }
-                        return null;
+                        return validateEmail(input);
                       },
                       onSaved: (input) => _email = input,
-                      decoration: const InputDecoration(labelText: 'Email'),
+                      decoration: const InputDecoration(
+                        labelText: 'Email',
+                        // icon: Icon(Icons.email),
+                        // hintText: 'johndoe@example.com'
+                      ),
                     ),
                     TextFormField(
                       keyboardType: TextInputType.text,
                       obscureText: true,
                       validator: (input) {
-                        if (input == null || input.isEmpty) {
-                          return 'Please a valid password';
-                        }
-                        return null;
+                        return validatePassword(input);
                       },
                       onSaved: (input) => _password = input,
-                      decoration: const InputDecoration(labelText: 'Password'),
+                      decoration: const InputDecoration(
+                        labelText: 'Password',
+                        // icon: Icon(Icons.password),
+                        // hintText: 'Password'
+                      ),
                     ),
                     const SizedBox(height: 40),
                     ElevatedButton(
