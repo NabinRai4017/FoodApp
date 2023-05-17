@@ -1,6 +1,5 @@
 import 'package:food_app/action/user_action.dart';
 import 'package:food_app/model/state/user_state.dart';
-// ignore: depend_on_referenced_packages
 import 'package:redux/redux.dart';
 
 final userReducer = combineReducers<UserState?>([
@@ -14,4 +13,12 @@ UserState _logIn(UserState? loginState, action) {
 
 UserState? _logOut(UserState? loginState, action) {
   return null;
+}
+
+bool isLoggedInReducer(bool state, dynamic action) {
+  if (action is UpdateLogin) {
+    return action.isLoggedIn;
+  } else {
+    return state;
+  }
 }

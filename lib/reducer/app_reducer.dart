@@ -4,6 +4,7 @@ import 'package:food_app/reducer/user_reducer.dart';
 
 AppState appReducer(AppState state, action) {
   return AppState(
+      isLoggedIn: isLoggedInReducer(state.isLoggedIn, action),
       isLoading: loadingReducer(state.isLoading, action),
       userState: userReducer(state.userState, action));
 }

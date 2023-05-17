@@ -1,5 +1,4 @@
 import 'package:food_app/model/user.dart';
-import 'package:food_app/service/user_pref.dart';
 
 class UserState {
   User? user;
@@ -11,6 +10,8 @@ class UserState {
     final user = User.fromJson(data['user']);
     return UserState(key: key, user: user);
   }
+
+  UserState? initial() => null;
 
   @override
   String toString() {

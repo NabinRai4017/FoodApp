@@ -1,5 +1,6 @@
-import 'package:food_app/service/shared_preferences.dart';
-import 'package:food_app/service/storage_service.dart';
+import 'package:food_app/model/state/user_state.dart';
+import 'package:food_app/utils/shared_preferences.dart';
+import 'package:food_app/utils/storage_service.dart';
 
 class UserConst {
   static const String key = 'USER_KEY';
@@ -52,7 +53,7 @@ class UserPrefs {
   static Future setUserId(int value) =>
       SharedPreference.setInt(UserConst.userId, value);
 
-  Future<void> clear() async {
+  static Future<void> clear() async {
     await Future.wait(<Future>[
       setAuthenticated(false),
       seUserkey(''),
@@ -61,6 +62,18 @@ class UserPrefs {
       setLastName(''),
       setUsername(''),
       setUserId(0),
+    ]);
+  }
+
+  static Future<void> saveUser(UserState userState) async {
+    await Future.wait(<Future>[
+      setAuthenticated(true),
+      seUserkey(userState.key!),
+      setEmail(userState.user!.email),
+      setFirstName(userState.user!.firstName),
+      setLastName(userState.user!.lastName),
+      setUsername(userState.user!.username),
+      setUserId(userState.user!.id),
     ]);
   }
 }

@@ -7,10 +7,14 @@ class LogIn {
 
 class LoginSuccessful {
   final UserState userState;
-
   LoginSuccessful({required this.userState});
 }
 
 class LogOut {}
 
 class LogoutSuccessful {}
+
+class UpdateLogin {
+  final bool isLoggedIn;
+  UpdateLogin({required this.isLoggedIn});
+}

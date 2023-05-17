@@ -25,56 +25,63 @@ class _ProfileScreenState extends State<ProfileScreen>
         converter: _ViewModel.fromStore,
         builder: (BuildContext context, _ViewModel vm) {
           return Scaffold(
-            floatingActionButton: FloatingActionButton(
-              onPressed: () {},
-              tooltip: 'Help?',
-              child: const Icon(Icons.chat),
-            ),
-            body: Form(
-              key: _formKey,
-              child: Padding(
-                padding: const EdgeInsets.only(left: 30, right: 30, top: 30),
-                child: Column(
-                  children: [
-                    TextFormField(
-                      keyboardType: TextInputType.emailAddress,
-                      validator: (input) {
-                        return validateEmail(input);
-                      },
-                      onSaved: (input) => _email = input,
-                      decoration: const InputDecoration(
-                        labelText: 'Email',
-                        // icon: Icon(Icons.email),
-                        // hintText: 'johndoe@example.com'
+            floatingActionButton: vm.isLoggedIn
+                ? FloatingActionButton(
+                    onPressed: () {},
+                    tooltip: 'Help?',
+                    child: const Icon(Icons.chat),
+                  )
+                : null,
+            body: vm.isLoggedIn
+                ? const Center(
+                    child: Text('Logged in'),
+                  )
+                : Form(
+                    key: _formKey,
+                    child: Padding(
+                      padding:
+                          const EdgeInsets.only(left: 30, right: 30, top: 30),
+                      child: Column(
+                        children: [
+                          TextFormField(
+                            keyboardType: TextInputType.emailAddress,
+                            validator: (input) {
+                              return validateEmail(input);
+                            },
+                            onSaved: (input) => _email = input,
+                            decoration: const InputDecoration(
+                              labelText: 'Email',
+                              // icon: Icon(Icons.email),
+                              // hintText: 'johndoe@example.com'
+                            ),
+                          ),
+                          TextFormField(
+                            keyboardType: TextInputType.text,
+                            obscureText: true,
+                            validator: (input) {
+                              return validatePassword(input);
+                            },
+                            onSaved: (input) => _password = input,
+                            decoration: const InputDecoration(
+                              labelText: 'Password',
+                              // icon: Icon(Icons.password),
+                              // hintText: 'Password'
+                            ),
+                          ),
+                          const SizedBox(height: 40),
+                          ElevatedButton(
+                              onPressed: () {
+                                final formState = _formKey.currentState;
+                                if (formState!.validate()) {
+                                  formState.save();
+                                  vm.onPressedCallback(_email!, _password!);
+                                }
+                              },
+                              child: const Text("Login"))
+                        ],
                       ),
                     ),
-                    TextFormField(
-                      keyboardType: TextInputType.text,
-                      obscureText: true,
-                      validator: (input) {
-                        return validatePassword(input);
-                      },
-                      onSaved: (input) => _password = input,
-                      decoration: const InputDecoration(
-                        labelText: 'Password',
-                        // icon: Icon(Icons.password),
-                        // hintText: 'Password'
-                      ),
-                    ),
-                    const SizedBox(height: 40),
-                    ElevatedButton(
-                        onPressed: () {
-                          final formState = _formKey.currentState;
-                          if (formState!.validate()) {
-                            formState.save();
-                            vm.onPressedCallback(_email!, _password!);
-                          }
-                        },
-                        child: const Text("Login"))
-                  ],
-                ),
-              ),
-            ),
+                  ),
           );
         });
   }
@@ -82,15 +89,18 @@ class _ProfileScreenState extends State<ProfileScreen>
 
 class _ViewModel {
   final Function(String, String) onPressedCallback;
-  _ViewModel({required this.onPressedCallback});
+  final bool isLoggedIn;
+  _ViewModel({required this.isLoggedIn, required this.onPressedCallback});
 
   static _ViewModel fromStore(Store<AppState> store) {
-    return _ViewModel(onPressedCallback: (email, password) {
-      Map<String, String> data = {
-        "email": email,
-        "password": password,
-      };
-      store.dispatch(LogIn(data: data));
-    });
+    return _ViewModel(
+        isLoggedIn: store.state.isLoggedIn,
+        onPressedCallback: (email, password) {
+          Map<String, String> data = {
+            "email": email,
+            "password": password,
+          };
+          store.dispatch(LogIn(data: data));
+        });
   }
 }

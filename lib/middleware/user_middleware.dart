@@ -2,14 +2,15 @@ import 'package:flutter/foundation.dart';
 import 'package:food_app/action/loading_action.dart';
 import 'package:food_app/action/user_action.dart';
 import 'package:food_app/model/state/user_state.dart';
+import 'package:food_app/service/user_pref.dart';
 import 'package:food_app/service/user_service.dart';
 // ignore: depend_on_referenced_packages
 import 'package:redux/redux.dart';
 import 'dart:convert';
 import '../model/state/app_state.dart';
 
-List<Middleware<AppState>> createUserMiddleware(context) {
-  final logIn = _createLogInMiddleware(context);
+List<Middleware<AppState>> createUserMiddleware() {
+  final logIn = _createLogInMiddleware();
   final logOut = _createLogOutMiddleware();
   return [
     TypedMiddleware<AppState, LogIn>(logIn),
@@ -17,7 +18,7 @@ List<Middleware<AppState>> createUserMiddleware(context) {
   ];
 }
 
-Middleware<AppState> _createLogInMiddleware(context) {
+Middleware<AppState> _createLogInMiddleware() {
   return (Store store, action, NextDispatcher next) async {
     if (action is LogIn) {
       try {
@@ -32,8 +33,10 @@ Middleware<AppState> _createLogInMiddleware(context) {
             print("json data: ${jsonData.toString()}");
           }
           UserState userState = UserState.fromJson(jsonData);
+          UserPrefs.saveUser(userState);
           store.dispatch(LoadingEnd());
           store.dispatch(LoginSuccessful(userState: userState));
+          store.dispatch(UpdateLogin(isLoggedIn: true));
         } else {
           if (kDebugMode) {
             print("====${response.body}====");
@@ -66,6 +69,7 @@ Middleware<AppState> _createLogOutMiddleware() {
   return (Store store, action, NextDispatcher next) async {
     if (action is LogOut) {
       try {
+        UserPrefs.clear();
         store.dispatch(LogoutSuccessful());
       } catch (error) {
         //store.dispatch(new LogOutFail(error));
