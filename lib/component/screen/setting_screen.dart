@@ -21,7 +21,7 @@ class _SettingScreenState extends State<SettingScreen> {
           return Scaffold(
             appBar: AppBar(
               title:
-                  Text(AppLocalizations.of(context).translate('setting_title')),
+                  Text(AppLocalizations.of(context).translate('settingTitle')),
             ),
             body:
                 ListView(padding: const EdgeInsets.all(20), children: <Widget>[
