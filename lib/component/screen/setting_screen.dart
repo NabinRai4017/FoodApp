@@ -15,13 +15,14 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+
     return StoreConnector<AppState, _ViewModel>(
         converter: _ViewModel.fromStore,
         builder: (BuildContext context, _ViewModel vm) {
           return Scaffold(
             appBar: AppBar(
-              title:
-                  Text(AppLocalizations.of(context).translate('settingTitle')),
+              title: Text(localizations.translate('nav.settings')),
             ),
             body:
                 ListView(padding: const EdgeInsets.all(20), children: <Widget>[

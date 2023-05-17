@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/utils/app_localizations.dart';
 
 class BottomNavBar extends StatelessWidget {
   const BottomNavBar(
@@ -10,6 +11,8 @@ class BottomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+
     return SafeArea(
         child: Padding(
       padding: const EdgeInsets.all(16),
@@ -23,35 +26,35 @@ class BottomNavBar extends StatelessWidget {
         child: ClipRRect(
           borderRadius: const BorderRadius.all(Radius.circular(20)),
           child: BottomNavigationBar(
-            items: const <BottomNavigationBarItem>[
+            items: <BottomNavigationBarItem>[
               BottomNavigationBarItem(
-                  icon: SizedBox(
+                  icon: const SizedBox(
                     height: 38,
                     width: 38,
                     child: Icon(Icons.home),
                   ),
-                  label: "Home"),
+                  label: localizations.translate("tab.home")),
               BottomNavigationBarItem(
-                  icon: SizedBox(
+                  icon: const SizedBox(
                     height: 38,
                     width: 38,
                     child: Icon(Icons.local_offer),
                   ),
-                  label: "Offer"),
+                  label: localizations.translate("tab.offer")),
               BottomNavigationBarItem(
-                  icon: SizedBox(
+                  icon: const SizedBox(
                     height: 38,
                     width: 38,
                     child: Icon(Icons.favorite),
                   ),
-                  label: "Favorite"),
+                  label: localizations.translate("tab.fav")),
               BottomNavigationBarItem(
-                  icon: SizedBox(
+                  icon: const SizedBox(
                     height: 38,
                     width: 38,
                     child: Icon(Icons.person),
                   ),
-                  label: "Profile")
+                  label: localizations.translate("tab.profile"))
             ],
             currentIndex: selectedIndex,
             selectedItemColor: Colors.grey[800],

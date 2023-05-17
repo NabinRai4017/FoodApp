@@ -5,6 +5,7 @@ import 'package:flutter_redux/flutter_redux.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:food_app/model/state/app_state.dart';
 import 'package:food_app/utils/app_localizations.dart';
+import 'package:food_app/utils/language_code.dart';
 import 'package:redux/redux.dart';
 
 class ParentScreen extends StatelessWidget {
@@ -18,8 +19,8 @@ class ParentScreen extends StatelessWidget {
         builder: (BuildContext context, _ViewModel vm) {
           return MaterialApp(
               supportedLocales: const [
-                Locale('en'),
-                Locale('ne'),
+                Locale(LangaugeCode.english),
+                Locale(LangaugeCode.nepali),
               ],
               locale: vm.locale,
               localizationsDelegates: const [

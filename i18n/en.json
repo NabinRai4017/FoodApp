@@ -1,4 +1,11 @@
 {
-    "settingTitle": "Settings",
-    "appTitle": "Food App"
+    "nav.title": "Home", 
+    "nav.settings": "Settings",
+    "nav.appname": "App Name",
+    "nav.notifications": "Notifications",
+
+    "tab.fav": "Favourite",
+    "tab.offer": "Offer",
+    "tab.profile": "Profile",
+    "tab.home": "Home"
 }

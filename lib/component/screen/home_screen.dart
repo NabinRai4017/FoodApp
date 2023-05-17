@@ -38,12 +38,13 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final localizations = AppLocalizations.of(context);
+
     return StoreConnector<AppState, _ViewModel>(
         converter: _ViewModel.fromStore,
         builder: (BuildContext context, _ViewModel vm) {
           return Scaffold(
-            appBar: MainAppBar(
-                title: AppLocalizations.of(context).translate('appTitle')),
+            appBar: MainAppBar(title: localizations.translate('nav.appname')),
             drawer: const SideMenuDrawer(),
             body: IndexedStack(
               index: _selectedIndex,

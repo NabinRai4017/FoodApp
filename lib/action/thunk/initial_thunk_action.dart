@@ -6,6 +6,7 @@ import 'package:food_app/action/user_action.dart';
 import 'package:food_app/model/state/language_state.dart';
 import 'package:food_app/model/state/user_state.dart';
 import 'package:food_app/model/user.dart';
+import 'package:food_app/utils/language_code.dart';
 import 'package:food_app/utils/user_pref.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
@@ -43,7 +44,7 @@ ThunkAction loadInitialState() {
     }
     LanguageState languageState;
     if (langauge == '') {
-      languageState = LanguageState(locale: const Locale('en'));
+      languageState = LanguageState(locale: const Locale(LangaugeCode.english));
     } else {
       languageState = LanguageState(locale: Locale(langauge));
     }

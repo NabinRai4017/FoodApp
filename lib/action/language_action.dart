@@ -1,4 +1,4 @@
-import '../model/state/language_state.dart';
+import 'package:food_app/model/state/language_state.dart';
 
 class UpdateLanguage {
   final LanguageState languageState;

@@ -1,4 +1,11 @@
 {
-    "settingTitle": "Nepali",
-    "appTitle": "Nepali"
+    "nav.title": "होम",
+    "nav.settings": "सेटिङहरू",
+    "nav.appname": "App Name",
+    "nav.notifications": "नोटिफिकेसन",
+
+    "tab.fav": "फेब्रेट",
+    "tab.offer": "अफर",
+    "tab.profile": "प्रोफाइल",
+    "tab.home": "होम"
 }

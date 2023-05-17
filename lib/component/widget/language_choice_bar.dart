@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/action/language_action.dart';
+import 'package:food_app/model/state/app_state.dart';
 import 'package:food_app/model/state/language_state.dart';
+import 'package:food_app/utils/language_code.dart';
 import 'package:food_app/utils/language_pref.dart';
 import 'package:redux/redux.dart';
-
-import '../../model/state/app_state.dart';
 
 enum Language { english, nepali }
 
@@ -56,13 +56,15 @@ class _LanguageChoiceState extends State<LanguageChoice> {
           switch (language) {
             case Language.english:
               widget.store?.dispatch(UpdateLanguage(
-                  languageState: LanguageState(locale: const Locale('en'))));
-              LanguagePrefs.setLangauge('en');
+                  languageState: LanguageState(
+                      locale: const Locale(LangaugeCode.english))));
+              LanguagePrefs.setLangauge(LangaugeCode.english);
               break;
             case Language.nepali:
               widget.store?.dispatch(UpdateLanguage(
-                  languageState: LanguageState(locale: const Locale('ne'))));
-              LanguagePrefs.setLangauge('ne');
+                  languageState: LanguageState(
+                      locale: const Locale(LangaugeCode.nepali))));
+              LanguagePrefs.setLangauge(LangaugeCode.nepali);
               break;
           }
         });
