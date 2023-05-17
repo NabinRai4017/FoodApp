@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'package:food_app/action/loading_action.dart';
 import 'package:food_app/action/user_action.dart';
 import 'package:food_app/model/state/user_state.dart';
-import 'package:food_app/service/user_pref.dart';
+import 'package:food_app/utils/user_pref.dart';
 import 'package:food_app/service/user_service.dart';
 // ignore: depend_on_referenced_packages
 import 'package:redux/redux.dart';
