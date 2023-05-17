@@ -1,4 +1,5 @@
 // import 'package:flutter/foundation.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:food_app/action/language_action.dart';
 import 'package:food_app/action/user_action.dart';
@@ -36,6 +37,10 @@ ThunkAction loadInitialState() {
     }
 
     final langauge = await LanguagePrefs.selectedLanguage;
+    if (kDebugMode) {
+      print("============");
+      print(langauge);
+    }
     LanguageState languageState;
     if (langauge == '') {
       languageState = LanguageState(locale: const Locale('en'));

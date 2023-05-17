@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:food_app/action/language_action.dart';
 import 'package:food_app/model/state/language_state.dart';
+import 'package:food_app/utils/language_pref.dart';
 import 'package:redux/redux.dart';
 
 import '../../model/state/app_state.dart';
@@ -56,10 +57,12 @@ class _LanguageChoiceState extends State<LanguageChoice> {
             case Language.english:
               widget.store?.dispatch(UpdateLanguage(
                   languageState: LanguageState(locale: const Locale('en'))));
+              LanguagePrefs.setLangauge('en');
               break;
             case Language.nepali:
               widget.store?.dispatch(UpdateLanguage(
                   languageState: LanguageState(locale: const Locale('ne'))));
+              LanguagePrefs.setLangauge('ne');
               break;
           }
         });
