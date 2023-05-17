@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:food_app/component/screen/favourite_screen.dart';
@@ -8,9 +7,9 @@ import 'package:food_app/component/screen/profile_screen.dart';
 import 'package:food_app/component/widget/bottom_nav_bar.dart';
 import 'package:food_app/component/widget/main_app_bar.dart';
 import 'package:food_app/component/widget/side_menu_drawer.dart';
+import 'package:food_app/model/state/app_state.dart';
+import 'package:food_app/utils/app_localizations.dart';
 import 'package:redux/redux.dart';
-import '../../action/thunk/login_thunk_action.dart';
-import '../../model/state/app_state.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -40,11 +39,11 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return StoreConnector<AppState, _ViewModel>(
-        onInit: (store) => store.dispatch(loadLoginState()),
         converter: _ViewModel.fromStore,
         builder: (BuildContext context, _ViewModel vm) {
           return Scaffold(
-            appBar: const MainAppBar(title: "Food App"),
+            appBar: MainAppBar(
+                title: AppLocalizations.of(context).translate('appTitle')),
             drawer: const SideMenuDrawer(),
             body: IndexedStack(
               index: _selectedIndex,

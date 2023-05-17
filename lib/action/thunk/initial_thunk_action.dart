@@ -1,12 +1,16 @@
 // import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
+import 'package:food_app/action/language_action.dart';
 import 'package:food_app/action/user_action.dart';
+import 'package:food_app/model/state/language_state.dart';
 import 'package:food_app/model/state/user_state.dart';
 import 'package:food_app/model/user.dart';
 import 'package:food_app/utils/user_pref.dart';
 import 'package:redux/redux.dart';
 import 'package:redux_thunk/redux_thunk.dart';
+import '../../utils/language_pref.dart';
 
-ThunkAction loadLoginState() {
+ThunkAction loadInitialState() {
   return (Store store) async {
     final isLoggedIn = await UserPrefs.authenticated;
     // if (kDebugMode) {
@@ -30,5 +34,14 @@ ThunkAction loadLoginState() {
       store.dispatch(LoginSuccessful(userState: userState));
       store.dispatch(UpdateLogin(isLoggedIn: isLoggedIn));
     }
+
+    final langauge = await LanguagePrefs.selectedLanguage;
+    LanguageState languageState;
+    if (langauge == '') {
+      languageState = LanguageState(locale: const Locale('en'));
+    } else {
+      languageState = LanguageState(locale: Locale(langauge));
+    }
+    store.dispatch(UpdateLanguage(languageState: languageState));
   };
 }

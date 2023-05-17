@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:food_app/component/screen/setting_screen.dart';
 
 class SideMenuDrawer extends StatelessWidget {
   const SideMenuDrawer({Key? key}) : super(key: key);
@@ -30,10 +31,16 @@ class SideMenuDrawer extends StatelessWidget {
             onTap: () => {Navigator.of(context).pop()},
           ),
           ListTile(
-            leading: const Icon(Icons.settings),
-            title: const Text('Settings'),
-            onTap: () => {Navigator.of(context).pop()},
-          ),
+              leading: const Icon(Icons.settings),
+              title: const Text('Settings'),
+              onTap: () => {
+                    Navigator.of(context).pop(),
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SettingScreen()),
+                    )
+                  }),
           ListTile(
             leading: const Icon(Icons.border_color),
             title: const Text('Feedback'),

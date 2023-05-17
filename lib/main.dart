@@ -1,45 +1,55 @@
-// ignore_for_file: depend_on_referenced_packages
 import 'package:flutter/material.dart';
-import 'package:food_app/component/app_life_cycle.dart';
+import 'package:food_app/action/thunk/initial_thunk_action.dart';
 import 'package:food_app/component/screen/home_screen.dart';
-import 'package:food_app/middleware/user_middleware.dart';
-import 'package:food_app/reducer/app_reducer.dart';
-import 'package:redux_thunk/redux_thunk.dart';
-import 'model/state/app_state.dart';
-import 'package:redux_logging/redux_logging.dart';
 import 'package:flutter_redux/flutter_redux.dart';
+import 'package:food_app/model/state/app_state.dart';
 import 'package:redux/redux.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:food_app/utils/app_localizations.dart';
 
-void main() {
+void main() async {
   runApp(const FoodApp());
 }
 
 class FoodApp extends StatelessWidget {
-  const FoodApp({Key? key}) : super(key: key);
+  const FoodApp({
+    Key? key,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final store = Store<AppState>(
-      appReducer,
-      initialState: AppState.initial(),
-      middleware: [
-        ...createUserMiddleware(),
-        //  ...createErrorMiddleware(),
-        thunkMiddleware,
-        LoggingMiddleware.printer()
-      ],
-    );
+    return StoreConnector<AppState, _ViewModel>(
+        onInit: (store) => store.dispatch(loadInitialState()),
+        converter: _ViewModel.fromStore,
+        builder: (BuildContext context, _ViewModel vm) {
+          return MaterialApp(
+              supportedLocales: const [
+                Locale('en'),
+                Locale('ne'),
+              ],
+              locale: vm.locale,
+              localizationsDelegates: const [
+                AppLocalizations.delegate,
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              debugShowCheckedModeBanner: false,
+              routes: const {
+                // AppRoutes.home: (context) => HomeScreen(),
+                // AppRoutes.register: (context) => RegisterScreen(),
+                // AppRoutes.login: (context) => LoginScreen(),
+              },
+              home: const HomeScreen());
+        });
+  }
+}
 
-    return StoreProvider(
-        store: store,
-        child: const AppLifeCycle(
-            child: MaterialApp(
-                debugShowCheckedModeBanner: false,
-                routes: {
-                  // AppRoutes.home: (context) => HomeScreen(),
-                  // AppRoutes.register: (context) => RegisterScreen(),
-                  // AppRoutes.login: (context) => LoginScreen(),
-                },
-                home: HomeScreen())));
+class _ViewModel {
+  final Locale locale;
+  _ViewModel({required this.locale});
+
+  static _ViewModel fromStore(Store<AppState> store) {
+    return _ViewModel(locale: store.state.languageState.getLocale);
   }
 }

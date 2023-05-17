@@ -1,4 +1,5 @@
 import 'package:food_app/model/error.dart';
+import 'package:food_app/model/state/language_state.dart';
 import 'package:food_app/model/state/user_state.dart';
 
 class AppState {
@@ -6,15 +7,21 @@ class AppState {
   final bool isLoading;
   final UserState? userState;
   final ErrorState? errorState;
+  final LanguageState languageState;
 
   AppState(
       {required this.isLoggedIn,
       required this.isLoading,
-      required this.userState,
-      this.errorState});
+      this.userState,
+      this.errorState,
+      required this.languageState});
 
   factory AppState.initial() {
-    return AppState(isLoggedIn: false, isLoading: false, userState: null);
+    return AppState(
+        isLoggedIn: false,
+        isLoading: false,
+        userState: null,
+        languageState: LanguageState.initial());
   }
 
   AppState copyWith() {
@@ -22,7 +29,8 @@ class AppState {
         isLoggedIn: isLoggedIn,
         isLoading: isLoading,
         userState: userState,
-        errorState: errorState);
+        errorState: errorState,
+        languageState: languageState);
   }
 
 //
@@ -31,8 +39,10 @@ class AppState {
     return '''
 AppState{
   isLoggedIn: $isLoggedIn,
-isLoading: $isLoading, 
-userState: $userState,
-errorState: $errorState}''';
+  isLoading: $isLoading, 
+  userState: $userState,
+  errorState: $errorState,
+  languageState: $languageState,
+  }''';
   }
 }
