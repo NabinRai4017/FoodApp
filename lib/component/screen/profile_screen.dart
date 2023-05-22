@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_redux/flutter_redux.dart';
 import 'package:food_app/action/user_action.dart';
+import 'package:food_app/component/screen/help_chat.dart';
 import 'package:food_app/model/state/app_state.dart';
 import 'package:food_app/validation/email_validation.dart';
 import 'package:food_app/validation/password_validation.dart';
@@ -27,7 +28,13 @@ class _ProfileScreenState extends State<ProfileScreen>
           return Scaffold(
             floatingActionButton: vm.isLoggedIn
                 ? FloatingActionButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const HelpChat()),
+                      );
+                    },
                     tooltip: 'Help?',
                     child: const Icon(Icons.chat),
                   )
