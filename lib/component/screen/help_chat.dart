@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:web_socket_channel/web_socket_channel.dart';
+import 'dart:convert';
 
 class HelpChat extends StatefulWidget {
   const HelpChat({Key? key}) : super(key: key);
@@ -11,7 +12,7 @@ class HelpChat extends StatefulWidget {
 class _HelpChatState extends State<HelpChat> {
   final TextEditingController _controller = TextEditingController();
   final _channel = WebSocketChannel.connect(
-    Uri.parse('ws://urchin-app-rmjlj.ondigitalocean.app//ws/chatbot/'),
+    Uri.parse('ws://urchin-app-rmjlj.ondigitalocean.app/ws/chat/'),
   );
 
   // final _channel = WebSocketChannel.connect(
@@ -55,7 +56,8 @@ class _HelpChatState extends State<HelpChat> {
 
   void _sendMessage() {
     if (_controller.text.isNotEmpty) {
-      _channel.sink.add(_controller.text);
+      final payload = jsonEncode({"message": _controller.text});
+      _channel.sink.add(payload);
     }
   }
 
